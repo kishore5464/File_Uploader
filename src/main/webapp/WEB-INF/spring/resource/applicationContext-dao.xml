@@ -33,7 +33,7 @@
 		</property>
 		<property name="packagesToScan">
 			<list>
-				<value>com.viki.service.entities</value>
+				<value>com.kishore.service.entities</value>
 			</list>
 		</property>
 	</bean>

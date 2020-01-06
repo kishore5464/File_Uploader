@@ -1,0 +1,359 @@
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/TalentPortal/!svn/ver/1461/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities
+END
+LanguageMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/LanguageMaster.java
+END
+JobSeekerSkillProject.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerSkillProject.java
+END
+QpStatusMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/QpStatusMaster.java
+END
+Profile.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/Profile.java
+END
+ExperienceMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/ExperienceMaster.java
+END
+AdminDegree.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/AdminDegree.java
+END
+JobSeekerReferenceMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerReferenceMaster.java
+END
+JobSeekerPoints.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerPoints.java
+END
+JobseekerInterview.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobseekerInterview.java
+END
+JobRoleMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobRoleMaster.java
+END
+JobSeeker.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeeker.java
+END
+JobType.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobType.java
+END
+CourseMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/TalentPortal/!svn/ver/1086/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/CourseMaster.java
+END
+User.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/User.java
+END
+AuthorizedTestCenter.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/AuthorizedTestCenter.java
+END
+ExamPlanMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/ExamPlanMaster.java
+END
+JobSeekerSkillset.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerSkillset.java
+END
+JobSeekerAnnouncement.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerAnnouncement.java
+END
+JobSeekerDegree.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerDegree.java
+END
+JobSeekerContact.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerContact.java
+END
+TestimonialsMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/TestimonialsMaster.java
+END
+PointsMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/PointsMaster.java
+END
+QpStatusJobSeekerMapping.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/QpStatusJobSeekerMapping.java
+END
+CorpAnnouncementResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/TalentPortal/!svn/ver/1461/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/CorpAnnouncementResponse.java
+END
+JobSeekerExamSchedule.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerExamSchedule.java
+END
+DistrictMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/DistrictMaster.java
+END
+ChapterMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/TalentPortal/!svn/ver/1086/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/ChapterMaster.java
+END
+JobSeekerReferralDetails.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerReferralDetails.java
+END
+JobSeekerPreferedJobrole.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerPreferedJobrole.java
+END
+JobSeekerResponseMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerResponseMaster.java
+END
+JobRoleTechnologyMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobRoleTechnologyMaster.java
+END
+PointsActivityMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/PointsActivityMaster.java
+END
+AnnouncementMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/AnnouncementMaster.java
+END
+DegreeMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/DegreeMaster.java
+END
+ContactMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/ContactMaster.java
+END
+JobSeekerWorkpreference.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerWorkpreference.java
+END
+JobSeekerBasicQp.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerBasicQp.java
+END
+LogoMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/LogoMaster.java
+END
+JobSeekerLanguage.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerLanguage.java
+END
+JobSeekerStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerStatus.java
+END
+CorpInterviewResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/TalentPortal/!svn/ver/1461/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/CorpInterviewResponse.java
+END
+JobSeekerExamScore.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerExamScore.java
+END
+PointsRedeemHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/PointsRedeemHistory.java
+END
+JobSeekerExperience.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerExperience.java
+END
+JobSeekerSchool.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerSchool.java
+END
+ChapterCourseMapping.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/TalentPortal/!svn/ver/1086/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/ChapterCourseMapping.java
+END
+AdminCollege.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/AdminCollege.java
+END
+CityMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/CityMaster.java
+END
+BetaValueMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/BetaValueMaster.java
+END
+CorpProfile.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/TalentPortal/!svn/ver/1461/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/CorpProfile.java
+END
+CourseWeightage.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/TalentPortal/!svn/ver/1086/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/CourseWeightage.java
+END
+CollegeMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/CollegeMaster.java
+END
+JobSeekerPointsHistory.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerPointsHistory.java
+END
+ApprovalStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/ApprovalStatus.java
+END
+InterviewMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/InterviewMaster.java
+END
+JobSeekerCourse.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerCourse.java
+END
+AccessCode.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/AccessCode.java
+END
+IndustryMaster.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/IndustryMaster.java
+END
+JobSeekerExamRequest.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/TalentPortal/!svn/ver/1404/TalentEx_version_1.0/Talentex-Jobseeker/src/main/java/com/fbt/talentex/jobseeker/dao/entities/JobSeekerExamRequest.java
+END

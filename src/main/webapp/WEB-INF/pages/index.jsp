@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type">
-<title>Viki Ji File Upload</title>
+<title>File Upload</title>
 </head>
 <body>
 	<center>

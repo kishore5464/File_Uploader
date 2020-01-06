@@ -1,4 +1,4 @@
-package com.viki.business.impl;
+package com.kishore.business.impl;
 
 import java.io.File;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import com.viki.business.interfaces.File_Location_Business_Interfaces;
+import com.kishore.business.interfaces.File_Location_Business_Interfaces;
 import com.viki.dao.interfaces.File_Location_DAO_Interfaces;
 import com.viki.service.entities.File_Location;
 

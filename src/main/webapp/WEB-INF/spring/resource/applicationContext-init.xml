@@ -11,7 +11,7 @@
 	<context:annotation-config />
 
 	<!-- Activates scanning of @Repository and @Service -->
-	<context:component-scan base-package="com.viki" />
+	<context:component-scan base-package="com.kishore" />
 
 	<!-- Specify Application ClassPath -->
 	<context:property-placeholder location="classpath*:application*.properties"

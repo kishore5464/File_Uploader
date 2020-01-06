@@ -1,4 +1,4 @@
-package com.viki.business.interfaces;
+package com.kishore.business.interfaces;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
