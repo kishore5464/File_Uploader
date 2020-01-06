@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kishore.dao.interfaces.File_Location_DAO_Interfaces;
-import com.kishore.service.entities.File_Location;
+import com.viki.service.entities.File_Location;
 
 @Repository
 public class File_Location_DAO_Impl implements File_Location_DAO_Interfaces {

@@ -1,4 +1,4 @@
-package com.kishore.service.entities;
+package com.viki.service.entities;
 
 import java.io.Serializable;
 

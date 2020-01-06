@@ -8,7 +8,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.kishore.business.interfaces.File_Location_Business_Interfaces;
 import com.kishore.dao.interfaces.File_Location_DAO_Interfaces;
-import com.kishore.service.entities.File_Location;
+import com.viki.service.entities.File_Location;
 
 @Service
 public class File_Location_Business_Impl implements File_Location_Business_Interfaces
