@@ -1,0 +1,7 @@
+com/viki/service/entities/File_Location.class
+com/kishore/exception/CustomGenericException.class
+com/kishore/dao/interfaces/File_Location_DAO_Interfaces.class
+com/kishore/business/impl/File_Location_Business_Impl.class
+com/kishore/dao/impl/File_Location_DAO_Impl.class
+com/kishore/business/interfaces/File_Location_Business_Interfaces.class
+com/kishore/service/controller/Home_Contoller.class

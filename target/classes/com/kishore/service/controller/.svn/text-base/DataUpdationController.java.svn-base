@@ -1,0 +1,960 @@
+package com.fbt.talentex.jobseeker.service.controller;
+
+import java.io.IOException;
+import java.text.ParseException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.fbt.talentex.jobseeker.business.interfaces.AnnouncementBusiness;
+import com.fbt.talentex.jobseeker.business.interfaces.CourseBusiness;
+import com.fbt.talentex.jobseeker.business.interfaces.ExamScheduleBusiness;
+import com.fbt.talentex.jobseeker.business.interfaces.GenericBusiness;
+import com.fbt.talentex.jobseeker.business.interfaces.InterviewBusiness;
+import com.fbt.talentex.jobseeker.business.interfaces.JobRoleBusiness;
+import com.fbt.talentex.jobseeker.business.interfaces.ProfileBusiness;
+import com.fbt.talentex.jobseeker.dao.entities.AdminCollege;
+import com.fbt.talentex.jobseeker.dao.entities.AdminDegree;
+import com.fbt.talentex.jobseeker.exception.CustomGenericException;
+import com.fbt.talentex.jobseeker.service.pojo.UIAddress;
+import com.fbt.talentex.jobseeker.service.pojo.UIDiploma;
+import com.fbt.talentex.jobseeker.service.pojo.UIExperience;
+import com.fbt.talentex.jobseeker.service.pojo.UIHighSchool;
+import com.fbt.talentex.jobseeker.service.pojo.UILangSkill;
+import com.fbt.talentex.jobseeker.service.pojo.UINonTechinalCourse;
+import com.fbt.talentex.jobseeker.service.pojo.UIPassword;
+import com.fbt.talentex.jobseeker.service.pojo.UIPersonal;
+import com.fbt.talentex.jobseeker.service.pojo.UIPostGraduate;
+import com.fbt.talentex.jobseeker.service.pojo.UIProjectSkill;
+import com.fbt.talentex.jobseeker.service.pojo.UISslcSchool;
+import com.fbt.talentex.jobseeker.service.pojo.UITechSkill;
+import com.fbt.talentex.jobseeker.service.pojo.UITechnicalCourse;
+import com.fbt.talentex.jobseeker.service.pojo.UITechnology;
+import com.fbt.talentex.jobseeker.service.pojo.UIUnderGraduate;
+import com.fbt.talentex.jobseeker.service.pojo.UIWorkPreference;
+
+@Controller
+public class DataUpdationController {
+	
+	@Autowired
+	ProfileBusiness profileBusiness;
+	@Autowired
+	AnnouncementBusiness announcementBusiness;
+	@Autowired
+	GenericBusiness genericBusiness;
+	@Autowired
+	JobRoleBusiness jobRoleBusiness;
+	@Autowired
+	InterviewBusiness interviewBusiness ;
+	@Autowired
+	CourseBusiness courseBusiness;
+	@Autowired
+	ExamScheduleBusiness examScheduleBusiness;
+
+
+	@RequestMapping({ "/supersonal" })
+	public String userPersonal(HttpServletRequest request, HttpSession session,
+			Model model) throws ParseException {
+		try {
+			UIPersonal uiPersonal = new UIPersonal();
+			uiPersonal.setSemail(request.getParameter("altemail"));
+			uiPersonal.setNickname(request.getParameter("nkname"));
+			uiPersonal.setScontact(request.getParameter("altcontact"));
+			uiPersonal.setPemail(request.getParameter("email"));
+			uiPersonal.setPcontact(request.getParameter("contact"));
+			uiPersonal.setPassnumber(request.getParameter("pasno"));
+			uiPersonal.setFathername(request.getParameter("fname"));
+			uiPersonal.setPannumber(request.getParameter("panno"));
+			uiPersonal.setGender(request.getParameter("gender"));
+			uiPersonal.setCreatedate(request.getParameter("createdate"));
+			uiPersonal.setUserMasterid((Integer) session.getAttribute("masterid"));
+			uiPersonal.setDob(request.getParameter("dob"));
+
+			/*uiPersonal.setPrimaryMasterContactid(Integer.valueOf(Integer
+					.parseInt(request.getParameter("pmid"))));
+			if (request.getParameter("smid") != "") {
+				uiPersonal.setSecondaryMasterContactid(Integer.valueOf(Integer
+						.parseInt(request.getParameter("smid"))));
+			}*/
+			Integer uniqueId = (Integer) session.getAttribute("jobseekerid");
+			uiPersonal.setUserUniqueid(uniqueId);
+			String redirectPage;
+			this.profileBusiness.putJobseekerPersonal(uiPersonal);
+			if (Integer.parseInt(request.getParameter("sandc")) == 1) {
+
+				redirectPage = "redirect:/address";
+			} else {
+
+				redirectPage = "redirect:/personal";
+			}
+
+			return redirectPage;
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping({ "/suaddress" })
+	public String userContact(HttpServletRequest request, Model model,
+			HttpSession session) {
+		try {
+			UIAddress uiAddress = new UIAddress();
+			String redirectPage;
+			/* Secondary Address */
+			uiAddress.setSaddressline1(request.getParameter("caline1"));
+			uiAddress.setSaddressline2(request.getParameter("caline2"));
+			uiAddress.setSpincode(request.getParameter("cpin"));
+			
+			/* Primary Address Same as Secondary Address */
+			int userchk = Integer.parseInt(request.getParameter("chcli"));
+			if (userchk == 1) {
+				uiAddress.setPaddressline1(request.getParameter("caline1"));
+				uiAddress.setPaddressline2(request.getParameter("caline2"));
+				uiAddress.setPpincode(request.getParameter("cpin"));
+				/* Primary City And District */
+				uiAddress.setPcityId(Integer.parseInt(request
+						.getParameter("ccity[]")));
+				uiAddress.setPdistrictId(Integer.parseInt(request
+						.getParameter("cdist[]")));
+				 /* Secondary City And District */ 
+				uiAddress.setScityId(Integer.parseInt(request
+						.getParameter("ccity[]")));
+				uiAddress.setSdistrictId(Integer.parseInt(request
+						.getParameter("cdist[]")));
+			}
+			
+			/* Primary Address Different as Secondary Address */
+			else if (userchk == 0) {
+				uiAddress.setPaddressline1(request.getParameter("paline1"));
+				uiAddress.setPaddressline2(request.getParameter("paline2"));
+				uiAddress.setPpincode(request.getParameter("ppin"));
+				/* Primary City And District */
+				uiAddress.setPcityId(Integer.parseInt(request
+						.getParameter("pcity[]")));
+				uiAddress.setPdistrictId(Integer.parseInt(request
+						.getParameter("pdist[]")));
+				 /* Secondary City And District */ 
+				uiAddress.setScityId(Integer.parseInt(request
+						.getParameter("ccity[]")));
+				uiAddress.setSdistrictId(Integer.parseInt(request
+						.getParameter("cdist[]")));
+			}
+			Integer uniqueId = (Integer) session.getAttribute("jobseekerid");
+			uiAddress.setUserUniqueid(uniqueId);
+			this.profileBusiness.putJobseekerContact(uiAddress);
+			session.setAttribute("pincode",request.getParameter("cpin"));
+			if (Integer.parseInt(request.getParameter("sandc")) == 16) 
+			{
+				redirectPage = "redirect:/assessment";
+			}
+			else if (Integer.parseInt(request.getParameter("sandc")) == 10) 
+			{
+				redirectPage = "redirect:/education";
+			}
+			else if (Integer.parseInt(request.getParameter("sandc")) == 12) 
+			{
+				redirectPage = "redirect:/education1";
+			}
+			else if (Integer.parseInt(request.getParameter("sandc")) == 14) 
+			{
+				redirectPage = "redirect:/ug";
+			}
+			else if (Integer.parseInt(request.getParameter("sandc")) == 13) 
+			{
+				redirectPage = "redirect:/diploma";
+			}
+			else
+			{
+				redirectPage = "redirect:/address";
+			}
+			return redirectPage;
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping({ "/suug" })
+	public String userugDegree(HttpServletRequest request, Model model,
+			HttpSession session) {
+		try {
+			UIUnderGraduate uiUnderGraduate = new UIUnderGraduate();
+
+			uiUnderGraduate.setUgaggregate(request.getParameter("uaggr"));
+			uiUnderGraduate.setUgcollegemode(request
+					.getParameter("ugcollegemode"));
+			uiUnderGraduate.setUgbacklogs(request.getParameter("ubglk"));
+			uiUnderGraduate.setUgregnumber(request.getParameter("examreg"));
+			uiUnderGraduate.setUgyoc(request.getParameter("uyop"));
+			session.setAttribute("ugper", request.getParameter("uaggr"));
+			session.setAttribute("ugyoc", request.getParameter("uyop"));
+			if(request.getParameter("ucol")!=null)
+			{
+				uiUnderGraduate.setUgcollegeId(Integer.parseInt(request
+						.getParameter("ucol")));
+			}
+			else
+			{
+				Integer uniqueId = (Integer) session.getAttribute("jobseekerid");
+				AdminCollege adminCollege = new AdminCollege();
+				adminCollege.setJobSeekerId(uniqueId);
+				adminCollege.setName(request.getParameter("collname"));
+				adminCollege.setState(null);
+				adminCollege.setDistrict(null);
+				adminCollege.setType("ug");
+				adminCollege.setUniversity(request.getParameter("uuniv"));
+				genericBusiness.newCollegeUpload(adminCollege);
+				if(request.getParameter("uctype").equals("engg"))
+				{
+					uiUnderGraduate.setUgcollegeId(1586);
+				}
+				else if(request.getParameter("uctype").equals("arts"))
+				{
+					uiUnderGraduate.setUgcollegeId(1585);
+				}
+
+			}
+			if(request.getParameter("udep")!=null)
+			{
+				uiUnderGraduate.setUgdegreeId(Integer.parseInt(request
+						.getParameter("udep")));
+			}
+			else
+			{
+				Integer uniqueId = (Integer) session.getAttribute("jobseekerid");
+				AdminDegree adminDegree = new AdminDegree();
+				adminDegree.setJobSeekerId(uniqueId);;
+				adminDegree.setDegree(request.getParameter("degname"));
+				adminDegree.setDepartment(request.getParameter("depname"));
+				adminDegree.setGraduation("ug");
+				genericBusiness.newDegreeUpload(adminDegree);
+				uiUnderGraduate.setUgdegreeId(7);
+			}
+
+
+			if (request.getParameter("ugid") != null) {
+				uiUnderGraduate.setUiid(Integer.valueOf(Integer
+						.parseInt(request.getParameter("ugid"))));
+			}
+			Integer uniqueId = (Integer) session.getAttribute("jobseekerid");
+			uiUnderGraduate.setUserUniqueid(uniqueId);
+			this.profileBusiness.putJobseekerUgDegree(uiUnderGraduate);
+			String redirectPage;
+			if (Integer.parseInt(request.getParameter("sandc")) == 1) {
+				session.setAttribute("addressredirect","16");
+				redirectPage = "redirect:/pg";
+			} else {
+				session.setAttribute("addressredirect","14");
+				redirectPage = "redirect:/ug";
+			}
+
+			return redirectPage;
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping({ "/supg" })
+	public String userpgDegree(HttpServletRequest request, Model model,
+			HttpSession session) {
+		try {
+			UIPostGraduate uiPostGraduate = new UIPostGraduate();
+			uiPostGraduate.setPgcollegemode(request
+					.getParameter("pgcollegemode"));
+			uiPostGraduate.setPgaggregate(request.getParameter("paggr"));
+			uiPostGraduate.setPgbacklogs(request.getParameter("pbglk"));
+
+			uiPostGraduate.setPgregnumber(request.getParameter("examreg"));
+			uiPostGraduate.setPgyoc(request.getParameter("pyop"));
+
+
+			if(request.getParameter("pcol")!=null)
+			{
+				uiPostGraduate.setPgcollegeId(Integer.parseInt(request
+						.getParameter("pcol")));
+			}
+			else
+			{
+				Integer uniqueId = (Integer) session.getAttribute("jobseekerid");
+				AdminCollege adminCollege = new AdminCollege();
+				adminCollege.setJobSeekerId(uniqueId);
+				adminCollege.setName(request.getParameter("collname"));
+				adminCollege.setState(null);
+				adminCollege.setDistrict(null);
+				adminCollege.setType("pg");
+				adminCollege.setUniversity(request.getParameter("puniv"));
+				genericBusiness.newCollegeUpload(adminCollege);
+				if(request.getParameter("pctype").equals("engg"))
+				{
+					uiPostGraduate.setPgcollegeId(1586);
+				}
+				else if(request.getParameter("pctype").equals("arts"))
+				{
+					uiPostGraduate.setPgcollegeId(1585);
+				}
+
+			}
+			if(request.getParameter("pdep")!=null)
+			{
+				uiPostGraduate.setPgdegreeId(Integer.parseInt(request
+						.getParameter("pdep")));
+			}
+			else
+			{
+				Integer uniqueId = (Integer) session.getAttribute("jobseekerid");
+				AdminDegree adminDegree = new AdminDegree();
+				adminDegree.setJobSeekerId(uniqueId);
+				adminDegree.setDegree(request.getParameter("degname"));
+				adminDegree.setDepartment(request.getParameter("depname"));
+				adminDegree.setGraduation("pg");
+				genericBusiness.newDegreeUpload(adminDegree);
+				uiPostGraduate.setPgdegreeId(8);
+			}
+
+
+
+			if (request.getParameter("pgid") != "") {
+				uiPostGraduate.setPgid(Integer.valueOf(Integer.parseInt(request
+						.getParameter("pgid"))));
+			}
+			Integer uniqueId = (Integer) session.getAttribute("jobseekerid");
+			uiPostGraduate.setUserUniqueid(uniqueId);
+			this.profileBusiness.putJobseekerPgDegree(uiPostGraduate);
+			String redirectPage;
+			if (Integer.parseInt(request.getParameter("sandc")) == 1) 
+			{
+
+				redirectPage = "redirect:/personal";
+			}
+			else if (Integer.parseInt(request.getParameter("sandc")) == 2) 
+			{
+
+				redirectPage = "redirect:/personal";
+			}
+			else 
+			{
+
+				redirectPage = "redirect:/pg";
+			}
+			return redirectPage;
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping({ "/suseducation" })
+	public String usersslcSchool(HttpServletRequest request, Model model,
+			HttpSession session) {
+		try {
+			session.setAttribute("addressredirect","10");
+			UISslcSchool uiSslcSchool = new UISslcSchool();
+			uiSslcSchool.setMaggregate(request.getParameter("saggr"));
+			uiSslcSchool.setMboard(request.getParameter("sboard"));
+			uiSslcSchool.setMschoolname(request.getParameter("ssname"));
+			uiSslcSchool.setMyoc(request.getParameter("syop"));
+
+			session.setAttribute("sslcper", request.getParameter("saggr"));
+			session.setAttribute("sslcyoc", request.getParameter("syop"));
+			if (request.getParameter("mid") != "") {
+				uiSslcSchool.setMid(Integer.valueOf(Integer.parseInt(request
+						.getParameter("mid"))));
+			}
+			Integer uniqueId = (Integer) session.getAttribute("jobseekerid");
+			uiSslcSchool.setUserUniqueid(uniqueId);
+			String redirectPage;
+			this.profileBusiness.putJobseekerSslcSchool(uiSslcSchool);
+			if (Integer.parseInt(request.getParameter("sandc")) == 1) {
+				session.setAttribute("addressredirect","12");
+				redirectPage = "redirect:/education1";
+			}
+			
+				
+			else {
+				session.setAttribute("addressredirect","10");
+				redirectPage = "redirect:/education";
+			}
+
+			return redirectPage;
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping({ "/suseducation2" })
+	public String userhscSchool(HttpServletRequest request, Model model,
+			HttpSession session) {
+		try {session.setAttribute("addressredirect","12");
+			UIHighSchool uiHighSchool = new UIHighSchool();
+			Integer uniqueId;
+			if (Integer.parseInt(request.getParameter("chk")) == 1) {
+				uiHighSchool.setHaggregate("" + 0);
+				uiHighSchool.setHboard("" + 0);
+				uiHighSchool.setHgroup("" + 0);
+				uiHighSchool.setHschoolname("" + 0);
+				uiHighSchool.setHyoc("" + 0);
+
+				if (request.getParameter("hscid") != "") {
+					uiHighSchool.setHscid(Integer.valueOf(Integer
+							.parseInt(request.getParameter("hscid"))));
+				}
+				uniqueId = (Integer) session.getAttribute("jobseekerid");
+				uiHighSchool.setUserUniqueid(uniqueId);
+				this.profileBusiness.putJobseekerHscSchool(uiHighSchool);
+
+			} else {
+				uiHighSchool.setHaggregate(request.getParameter("haggr"));
+				uiHighSchool.setHboard(request.getParameter("hboard"));
+				uiHighSchool.setHgroup(request.getParameter("hgroup"));
+				uiHighSchool.setHschoolname(request.getParameter("hsname"));
+				uiHighSchool.setHyoc(request.getParameter("hyop"));
+				session.setAttribute("hscper", request.getParameter("haggr"));
+				session.setAttribute("hscyoc", request.getParameter("hyop"));
+				if (request.getParameter("hscid") != "") {
+					uiHighSchool.setHscid(Integer.valueOf(Integer
+							.parseInt(request.getParameter("hscid"))));
+				}
+				uniqueId = (Integer) session.getAttribute("jobseekerid");
+				uiHighSchool.setUserUniqueid(uniqueId);
+				this.profileBusiness.putJobseekerHscSchool(uiHighSchool);
+
+			}
+			String redirectPage;
+			if (Integer.parseInt(request.getParameter("sandc")) == 1) {
+				redirectPage = "redirect:/diploma";
+				session.setAttribute("addressredirect","13");
+			} else {
+				redirectPage = "redirect:/education1";
+				session.setAttribute("addressredirect","12");
+			}
+
+			return redirectPage;
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping({ "/suseducation3" })
+	public String userDiploma(HttpServletRequest request, Model model,
+			HttpSession session) {
+		try {
+			session.setAttribute("addressredirect","13");
+			UIDiploma uiDiploma = new UIDiploma();
+			Integer uniqueId;
+			Integer count = 0;
+			String redirectPage;
+			if ((Integer.parseInt(request.getParameter("sandc")) == 1)) {
+				if (Integer.parseInt(request.getParameter("chk")) == 1) {
+					if (session.getAttribute("hscper") == null) {
+						redirectPage = "redirect:/education1";
+					} else if (session.getAttribute("hscper").equals(0.0)) {
+						redirectPage = "redirect:/diploma";
+						session.setAttribute("addressredirect","13");
+					}
+
+					else {
+						uiDiploma.setDipaggregate("" + 0);
+						uiDiploma.setDipgroup("" + 0);
+						uiDiploma.setDipinstitution("" + 0);
+						uiDiploma.setDipstate("" + 0);
+						uiDiploma.setDipyoc("" + 0);
+						if (request.getParameter("dipid") != "") {
+							uiDiploma.setDipid(Integer.valueOf(Integer
+									.parseInt(request.getParameter("dipid"))));
+						}
+						uniqueId = (Integer) session.getAttribute("jobseekerid");
+						uiDiploma.setUserUniqueid(uniqueId);
+						this.profileBusiness.putJobseekerDiplomaSchool(uiDiploma);
+						redirectPage = "redirect:/ug";
+						session.setAttribute("addressredirect","14");
+					}
+
+				}
+
+				else {
+
+					uiDiploma.setDipaggregate(request.getParameter("daggr"));
+					uiDiploma.setDipgroup(request.getParameter("dgroup"));
+					uiDiploma.setDipinstitution(request.getParameter("dsname"));
+					uiDiploma.setDipstate(request.getParameter("dstate"));
+					uiDiploma.setDipyoc(request.getParameter("dyop"));
+					session.setAttribute("dyoc",request.getParameter("dyop"));
+					session.setAttribute("diplomaper",
+							request.getParameter("daggr"));
+					if (request.getParameter("dipid") != "") {
+						uiDiploma.setDipid(Integer.valueOf(Integer
+								.parseInt(request.getParameter("dipid"))));
+					}
+					uniqueId = (Integer) session.getAttribute("jobseekerid");
+					uiDiploma.setUserUniqueid(uniqueId);
+					this.profileBusiness.putJobseekerDiplomaSchool(uiDiploma);
+					redirectPage = "redirect:/ug";
+					session.setAttribute("addressredirect","14");
+				}
+
+			}
+
+			else {
+				uiDiploma.setDipaggregate(request.getParameter("daggr"));
+				uiDiploma.setDipgroup(request.getParameter("dgroup"));
+				uiDiploma.setDipinstitution(request.getParameter("dsname"));
+				uiDiploma.setDipstate(request.getParameter("dstate"));
+				uiDiploma.setDipyoc(request.getParameter("dyop"));
+				if (request.getParameter("dipid") != "") {
+					uiDiploma.setDipid(Integer.valueOf(Integer.parseInt(request
+							.getParameter("dipid"))));
+				}
+				uniqueId = (Integer) session.getAttribute("jobseekerid");
+				uiDiploma.setUserUniqueid(uniqueId);
+				this.profileBusiness.putJobseekerDiplomaSchool(uiDiploma);
+				redirectPage = "redirect:/diploma";
+			}
+
+
+			return redirectPage;
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}	
+
+	@RequestMapping({ "/sutechskills" })
+	public String userSkill(HttpServletRequest request, Model model,
+			HttpSession session) {
+		try {
+			UITechSkill uiTechSkill = new UITechSkill();
+
+			uiTechSkill.setTechlastused(request.getParameter("tlused"));
+			uiTechSkill.setTechskilllevel(request.getParameter("tlevel"));
+			uiTechSkill.setTechskillname(request.getParameter("tskill"));
+			uiTechSkill.setTechyearuser(request.getParameter("tused"));
+			/*
+			 * uiTechSkill.setTechKnownid(Integer.parseInt(request.getParameter(
+			 * "tskill")));
+			 */
+
+			if (request.getParameter("techid") != "") {
+				uiTechSkill.setTechid(Integer.parseInt(request
+						.getParameter("techid")));
+			}
+
+			Integer uniqueId = (Integer) session.getAttribute("jobseekerid");
+			uiTechSkill.setUserUniqueid(uniqueId);
+			this.profileBusiness.putJobseekerSkills(uiTechSkill);
+
+			return "redirect:/techskills";
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping({ "/deltechskills" })
+	public String deluserSkill(HttpServletRequest request, Model model,
+			HttpSession session) {
+		try {
+			UITechSkill uiTechSkill = new UITechSkill();
+			uiTechSkill.setTechid(Integer.parseInt(request
+					.getParameter("techid")));
+			uiTechSkill.setTechlastused(request.getParameter("lused"));
+			uiTechSkill.setTechskilllevel(request.getParameter("tlevel"));
+			uiTechSkill.setTechskillname(request.getParameter("tskill"));
+			uiTechSkill.setTechyearuser(request.getParameter("yused"));
+			uiTechSkill.setUserUniqueid(Integer.parseInt(request
+					.getParameter("uniqueid")));
+			Integer jobseekerid = (Integer) session.getAttribute("jobseekerid");
+			uiTechSkill.setUserUniqueid(jobseekerid);
+			profileBusiness.deleteJobseekerSkills(uiTechSkill);
+
+			return "redirect:/techskills";
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping({ "/delproskills" })
+	public void delproskills(HttpServletRequest request, Model model,
+			HttpSession session) {
+
+		UIProjectSkill uiprojectskill=new UIProjectSkill();
+		uiprojectskill.setProjectSkillId(Integer.parseInt(request
+				.getParameter("projectid")));
+		Integer jobseekerid = (Integer) session.getAttribute("jobseekerid");
+		uiprojectskill.setUserUniqueId(jobseekerid);
+		profileBusiness.deleteJobseekerProjectSkill(uiprojectskill);
+
+	}
+
+
+
+	@RequestMapping({ "/sulangskills" })
+	public String userLangSill(HttpServletRequest request, Model model,
+			HttpSession session) {
+		try {
+			UILangSkill uiLangSkill = new UILangSkill();
+			uiLangSkill.setRead(request.getParameter("read"));
+			uiLangSkill.setSpeak(request.getParameter("speak"));
+			uiLangSkill.setWrite(request.getParameter("write"));
+			uiLangSkill.setLanKnowid(Integer.parseInt(request
+					.getParameter("tskill")));
+			if (request.getParameter("langid") != "") {
+
+				uiLangSkill.setLangid(Integer.parseInt(request
+						.getParameter("langid")));
+			}
+
+			Integer uniqueId = (Integer) session.getAttribute("jobseekerid");
+			uiLangSkill.setUserUniqueid(uniqueId);
+			this.profileBusiness.putJobseekerLanguage(uiLangSkill);
+
+			return "redirect:/langskills";
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping({ "/delangskills" })
+	public String deluserLangSill(HttpServletRequest request, Model model,
+			HttpSession session) {
+		try {
+			UILangSkill uiLangSkill = new UILangSkill();
+			uiLangSkill.setRead(request.getParameter("read"));
+			uiLangSkill.setSpeak(request.getParameter("speak"));
+			uiLangSkill.setWrite(request.getParameter("write"));
+			uiLangSkill.setLangid(Integer.parseInt(request
+					.getParameter("langid")));
+
+			Integer jobseekerid = (Integer) session.getAttribute("jobseekerid");
+			uiLangSkill.setUserUniqueid(jobseekerid);
+			this.profileBusiness.deleteJobseekerLanguage(uiLangSkill);
+
+
+			return "redirect:/langskills";
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+	@RequestMapping({ "/delmycourse" })
+	public void demycourse(HttpServletRequest request, Model model,
+			HttpSession session) {
+		try
+		{
+			courseBusiness.deleteJobseekerCourse(Integer.parseInt(request.getParameter("courseid")), Integer.parseInt(""+session.getAttribute("jobseekerid")));
+		}
+		catch(Exception e)
+		{
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+
+	}
+
+	@RequestMapping({ "/suexperience" })
+	public String userExperience(HttpServletRequest request, Model model,
+			HttpSession session) {
+		try {
+			UIExperience uiExperience = new UIExperience();
+
+			uiExperience.setCompanyname(request.getParameter("techcompany"));
+			uiExperience.setCtc(request.getParameter("ctc"));
+			uiExperience.setServicefrom(request.getParameter("from"));
+			uiExperience.setServiceto(request.getParameter("to"));
+			uiExperience.setTechname(request.getParameter("techname"));
+			uiExperience.setIndustryname(request.getParameter("industryname"));
+			if (request.getParameter("expid") != "") {
+				uiExperience.setExpid(Integer.parseInt(request
+						.getParameter("expid")));
+
+			}
+			Integer uniqueId = (Integer) session.getAttribute("jobseekerid");
+			uiExperience.setUserUniqueid(uniqueId);
+			this.profileBusiness.putJobseekerExperience(uiExperience);
+			return "redirect:/experience";
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping({ "/delexperience" })
+	public String userExperience1(HttpServletRequest request, Model model,
+			HttpSession session) throws ParseException {
+		try {
+			UIExperience uiExperience = new UIExperience();
+			uiExperience.setCompanyname(request.getParameter("techcompany"));
+			uiExperience.setServicefrom(request.getParameter("from"));
+			uiExperience.setTechname(request.getParameter("techname"));
+			uiExperience.setServiceto(request.getParameter("to"));
+			uiExperience.setExpid(Integer.parseInt(request
+					.getParameter("expid")));
+			uiExperience.setJobexpid(Integer.parseInt(request
+					.getParameter("jobexpid")));
+
+			Integer jobseekerid = (Integer) session.getAttribute("jobseekerid");
+			uiExperience.setUserUniqueid(jobseekerid);
+			profileBusiness.deleteJobseekerExperience(uiExperience);
+
+			return "redirect:/experience";
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping({ "/suworkpreference" })
+	public String userWorkPreference(HttpServletRequest request, Model model,
+			HttpSession session) throws ParseException {
+		try {
+			UIWorkPreference uiWorkPreference = new UIWorkPreference();
+			 uiWorkPreference.setIndustryName(request.getParameter("industry[]"));
+			uiWorkPreference.setWorkPreferenceCity(request.getParameter("ccity"));
+			uiWorkPreference.setWorkPreferenceCountry(request.getParameter("country"));
+			uiWorkPreference.setWorkPreferenceJobtypeId(Integer.parseInt(request
+					.getParameter("perference")));
+			if (request.getParameter("workprefid") != "") {
+				uiWorkPreference.setWorkPreferenceId(Integer.parseInt(request
+						.getParameter("workprefid")));
+
+			}
+			Integer uniqueId = (Integer) session.getAttribute("jobseekerid");
+			uiWorkPreference.setUserUniqueId(uniqueId);
+			this.profileBusiness.putJobseekerWorkPreference(uiWorkPreference);
+			String redirectPage;
+			if (Integer.parseInt(request.getParameter("sandc")) == 1) {
+
+				redirectPage = "redirect:/assessment";
+			} else {
+
+				redirectPage = "redirect:/preference";
+			}
+			return redirectPage;
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+
+	}
+
+	@RequestMapping({ "/supassword" })
+	public ModelAndView userPassword(HttpServletRequest request,
+			HttpSession session, ModelAndView model) {
+		try {
+			UIPassword uiPassword = new UIPassword();
+			model = new ModelAndView("password");
+			uiPassword.setCurrentPassword(request.getParameter("opassword"));
+			uiPassword.setNewPassword(request.getParameter("npassword"));
+			uiPassword.setRetypePassword(request.getParameter("rpassword"));
+
+			Integer masterId = (Integer) session.getAttribute("masterid");
+			uiPassword.setUserMasterId(masterId);
+
+			String status = genericBusiness
+					.ChangePassword(uiPassword);
+			model.addObject("passwordstatus", status);
+			return model;
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping({ "/sejobrole" })
+	public void jobRole(HttpServletRequest request, HttpSession session) {
+		try {
+			String roleid = request.getParameter("jobroleid");
+			session.setAttribute("jobroleid", roleid);
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+
+	} 
+	@RequestMapping( value ="/setechnology" )
+	public void jobTechnology(HttpServletRequest request, HttpSession session,HttpServletResponse response) {
+		try {
+			UITechnology uiTechnology = new UITechnology();
+			uiTechnology.setTechnologyId(Integer.parseInt(request
+					.getParameter("tech")));
+			uiTechnology.setRoleId(Integer.parseInt(request
+					.getParameter("roleid")));
+			uiTechnology.setUserUniqueId((Integer) session.getAttribute("jobseekerid"));
+			jobRoleBusiness.putJobseekerPreferedTechnoloy(uiTechnology);
+			Integer courseAvailability = courseBusiness.checkCourseAvailabilityBasedonTechnology(Integer.parseInt(request.getParameter("tech")));
+			response.setContentType("text/plain");
+			response.getWriter().println(String.valueOf(courseAvailability));
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping({ "/addtech" })
+	public void addtech(HttpServletRequest request, HttpSession session,HttpServletResponse response) {
+		try {
+			UITechnicalCourse uiTechnicalCourse = new UITechnicalCourse();
+			uiTechnicalCourse.setCourseId(Integer.parseInt(request
+					.getParameter("courseid")));
+			uiTechnicalCourse.setCourseMasterId(Integer.parseInt(request
+					.getParameter("masterid")));
+			uiTechnicalCourse.setUserUniqueId((Integer) session
+					.getAttribute("jobseekerid"));
+			courseBusiness
+			.putJobseekerPreferedTechnicalCourses(uiTechnicalCourse);
+
+
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping({ "/addnontech" })
+	public void addnontech(HttpServletRequest request, HttpSession session,HttpServletResponse response) {
+		try {
+			UINonTechinalCourse uiNonTechinalCourse = new UINonTechinalCourse();
+			uiNonTechinalCourse.setCourseId(Integer.parseInt(request
+					.getParameter("courseid")));
+			uiNonTechinalCourse.setCourseMasterId(Integer.parseInt(request
+					.getParameter("masterid")));
+			uiNonTechinalCourse.setUserUniqueId((Integer) session
+					.getAttribute("jobseekerid"));
+			courseBusiness
+			.putJobseekerPreferedNonTechnicalCourses(uiNonTechinalCourse);
+
+
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping({ "/photoupload" })
+	public void photoUpload(HttpServletRequest request, HttpSession session) {
+		try {
+			Integer user_masterid = (Integer) session.getAttribute("masterid");
+			String image = new String(request.getParameter("photo"));
+			String finalData = new String(
+					genericBusiness.photoUpload(image,
+							user_masterid));
+			session.setAttribute("photo", finalData);
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping({ "/projectskill" })
+	public String userProjectSkill(HttpServletRequest request, Model model,
+			HttpSession session) {
+		try {
+			UIProjectSkill uiProjectSkill = new UIProjectSkill();
+
+			uiProjectSkill.setCompanyName(request.getParameter("companyname"));
+			uiProjectSkill.setProjectDescription(request.getParameter("prointdesc"));
+			uiProjectSkill.setProjectTitle(request.getParameter("prointname"));
+			uiProjectSkill.setTimePeriod(request.getParameter("prointdur"));
+
+			if (request.getParameter("projectid") != "") {
+				uiProjectSkill.setProjectSkillId(Integer.parseInt(request
+						.getParameter("projectid")));
+			}
+
+			Integer uniqueId = (Integer) session.getAttribute("jobseekerid");
+			uiProjectSkill.setUserUniqueId(uniqueId);
+			this.profileBusiness.putJobseekerProjectSkill(uiProjectSkill);
+
+			return "redirect:/proint";
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+	@RequestMapping({ "/acceptannounce" })
+	public void acceptannounce(HttpServletRequest request, HttpSession session,HttpServletResponse response) {
+		try {
+			Integer uniqueId = (Integer) session.getAttribute("jobseekerid");
+			Integer announcementid = Integer.parseInt(request.getParameter("announceid"));
+			Integer status = 2;
+			if(request.getParameter("value").equalsIgnoreCase("applied"))
+			{
+				status = 1;
+			}
+			
+			announcementBusiness.announceAcceptence(uniqueId, announcementid,status);
+		}
+		catch(Exception e)
+		{
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+	@RequestMapping({ "/acceptinterview" })
+	public void acceptinterview(HttpServletRequest request, HttpSession session,HttpServletResponse response) {
+		try {
+			Integer uniqueId = (Integer) session.getAttribute("jobseekerid");
+			Integer announcementid = Integer.parseInt(request.getParameter("announceid"));
+			Integer status = Integer.parseInt(request.getParameter("value"));
+			interviewBusiness.interviewAcceptence(uniqueId, announcementid,status);
+		}
+		catch(Exception e)
+		{
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@RequestMapping( value ="/schedule" )
+	public void userstatus1(HttpServletRequest request, HttpSession session,HttpServletResponse response) throws IOException
+	{
+		session.setAttribute("courseid", request.getParameter("courseid"));
+		session.setAttribute("coursename", request.getParameter("cname"));
+		session.setAttribute("coursenameid", request.getParameter("cid"));
+		Integer examSize = examScheduleBusiness.checkAvailableExams(Integer.parseInt(""+request.getParameter("courseid")));
+		response.setContentType("text/plain");
+		response.getWriter().println(String.valueOf(examSize));
+	}
+	@RequestMapping({ "/scheduleexam" })
+	public String userexam(HttpServletRequest request, Model model,
+			HttpSession session) {
+		Integer jobseekerID=(Integer) session.getAttribute("jobseekerid");
+		Integer courseID=Integer.parseInt(request.getParameter("courseid"));
+		Integer centerID=Integer.parseInt(request.getParameter("examcenter"));
+		examScheduleBusiness.examSchedule(jobseekerID, courseID, centerID);
+		return "redirect:/schedulexams";
+	}
+	
+
+	@RequestMapping(value="/takexam")
+	public void examUrl(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws IOException{
+
+		Integer courseID=Integer.parseInt(request.getParameter("courseid"));
+		Integer jobseekerID=(Integer)session.getAttribute("jobseekerid");
+		String name=""+session.getAttribute("nickname");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/plain");
+		String url="http://talentex.in/TalentexES/?authid="+jobseekerID+"&cid="+courseID+"&uname="+name+"";
+		 response.getWriter().write(url);
+	}
+	
+	@RequestMapping(value="/examrequest")
+	public void examRequest(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws IOException{
+
+		Integer jobseekerID=(Integer)session.getAttribute("jobseekerid");
+		String data = request.getParameter("data");
+		String query = "not now";
+		if("1".equalsIgnoreCase(data))
+		{
+			query = "yes i like to take paid exam";
+		}
+		examScheduleBusiness.putJobseekerExamRequestedQuery(jobseekerID, query);
+	}
+	
+	@ExceptionHandler(CustomGenericException.class)
+	public ModelAndView handleCustomException(CustomGenericException ex) {
+		ModelAndView model = new ModelAndView("generic_error");
+		model.addObject("exception", ex);
+		return model;
+
+	}
+
+	@ExceptionHandler(Exception.class)
+	public ModelAndView handleAllException(Exception ex) {
+
+		ModelAndView model = new ModelAndView("exception_error");
+		return model;
+
+	}
+	
+
+}
