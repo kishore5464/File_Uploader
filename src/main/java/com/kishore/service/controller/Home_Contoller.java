@@ -1,4 +1,4 @@
-package com.viki.service.controller;
+package com.kishore.service.controller;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kishore.business.interfaces.File_Location_Business_Interfaces;
-import com.viki.exception.CustomGenericException;
+import com.kishore.exception.CustomGenericException;
 
 @Controller
 public class Home_Contoller {

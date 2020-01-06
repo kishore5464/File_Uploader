@@ -1,4 +1,4 @@
-package com.viki.exception;
+package com.kishore.exception;
 
 public class CustomGenericException extends RuntimeException {
 
